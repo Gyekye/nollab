@@ -56,7 +56,6 @@ struct Note: Identifiable, Codable {
 }
 
 
-
 ///  Extension on [Note]
 extension Note {
     
