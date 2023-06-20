@@ -5,7 +5,7 @@ struct BrandHeader: View {
     
     // UI
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .center) {
             HStack(alignment: .center, spacing: 0) {
                 
                 Text("Nollaboration")

@@ -12,11 +12,10 @@ struct LoginPage: View {
     // UI
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading,spacing: 15) {
+            VStack(alignment: .center,spacing: 15) {
                 Spacer()
                 Spacer()
                 BrandHeader()
-                Spacer()
                 Spacer()
                 Spacer()
                 CustomTextField(
@@ -42,9 +41,13 @@ struct LoginPage: View {
                             .cornerRadius(10)
                     }
                 }
+                NavigationLink(destination: SignUpPage()){
+                    Label("New here ? Register", systemImage: "person.badge.plus")
+                }
             }
             .padding([.horizontal], 20)
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
