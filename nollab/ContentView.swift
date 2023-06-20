@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  nollab
-//
-//  Created by richmond gyekye on 09/06/2023.
-//
-
 import SwiftUI
 
 struct ContentView: View {
