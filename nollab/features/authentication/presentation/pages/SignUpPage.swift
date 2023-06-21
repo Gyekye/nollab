@@ -8,6 +8,9 @@ struct SignUpPage: View {
     // User password
     @State private var password: String = ""
     
+    // Go back
+    @Environment(\.dismiss) private var goBack
+    
     
     // UI
     var body: some View {
@@ -41,8 +44,8 @@ struct SignUpPage: View {
                             .cornerRadius(10)
                     }
                 }
-                NavigationLink(destination: LoginPage()){
-                    Label("Already have an account ? Login", systemImage: "person")
+                Button(action: {goBack()}){
+                    Label("Already have an account ? Register", systemImage: "person")
                 }
             }
             .padding([.horizontal], 22)
