@@ -15,7 +15,7 @@ struct CustomTextField: View {
     var isSecured: Bool = false
     
     // Toggles focus state of textfield
-    
+    @FocusState var focus
     // UI
     var body: some View {
         if !isSecured {
@@ -34,12 +34,12 @@ struct CustomTextField: View {
                             .stroke(Color.gray.opacity(0.25), lineWidth: 1)
                     )
                     .textContentType(.emailAddress)
+                    .focused($focus)
                     .onChange(of: input) { newText in
                         print("Hello")
                         // Perform action or update state based on the new text
                         print("New text: \(newText)")
                     }
-                .focused(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=$isFocused@*/FocusState<Bool>().projectedValue/*@END_MENU_TOKEN@*/)
             }
             .padding([.top], 10)
         } else {
@@ -59,12 +59,12 @@ struct CustomTextField: View {
                             .stroke(Color.gray.opacity(0.25), lineWidth: 1)
                     )
                     .textContentType(.password)
+                    .focused($focus)
                     .onChange(of: input) { newText in
                         print("Hello")
                         // Perform action or update state based on the new text
                         print("New text: \(newText)")
                     }
-                .focused(/*@START_MENU_TOKEN@*//*@PLACEHOLDER=$isFocused@*/FocusState<Bool>().projectedValue/*@END_MENU_TOKEN@*/)
             }
             .padding([.top], 15)
         }
