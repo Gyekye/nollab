@@ -1,6 +1,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    // Toggles bottom sheet
+    @State private var showSheet = false
+    
+    // Toggle pop over
+    @State private var showPopOver = false
+    
+    // UI
     var body: some View {
         NavigationStack {
             VStack(alignment: .center) {
@@ -20,23 +27,36 @@ struct ContentView: View {
                     .font(.system(size: 18, weight: .medium))
             
                 
-                Button(action: {}){
+                Button(action: {
+                    self.showSheet = true
+                }){
                     Label("Continue With Email", systemImage: "person.fill")
-                        .padding([.horizontal], 60)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 5)
                 }
                 .buttonStyle(.borderedProminent)
                 
-                Button(action: {}){
+                Button(action: {
+                    self.showPopOver = true
+                }){
                     Label("Continue With Gmail", systemImage: "envelope.fill")
-                        .padding([.horizontal], 56)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 5)
                 }
                 .buttonStyle(.bordered)
                 .foregroundColor(.black)
                 .padding(.top, 5)
                     
             }
+            .padding(10)
         }
         .navigationBarBackButtonHidden(true)
+        .sheet(isPresented: $showSheet){
+            LoginPage(showSheet: $showSheet)
+        }
+        .popover(isPresented: $showPopOver){
+            
+        }
     }
 }
 

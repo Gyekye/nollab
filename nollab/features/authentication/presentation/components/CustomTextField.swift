@@ -5,9 +5,6 @@ struct CustomTextField: View {
     // Content of the textfield
     @Binding var input: String
 
-    // Label of the textfield
-    var label: String
-
     // Placeholder of textfield
     var placeholder: String
 
@@ -21,18 +18,12 @@ struct CustomTextField: View {
         if !isSecured {
             // Regular textfield
             VStack(alignment: .leading) {
-                Text(label)
-                        .font(.system(size: 14, weight: .medium, design: .default))
                 TextField("\(placeholder)", text: $input)
-                        .padding(16)
+                        .padding(12)
                         .background(Color.white)
-                        .cornerRadius(10)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled(true)
-                        .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color.gray.opacity(0.25), lineWidth: 1)
-                        )
+                        .border(focus ? .blue : .gray.opacity(0.5))
                         .textContentType(.emailAddress)
                         .focused($focus)
                         .onTapGesture {
@@ -46,32 +37,31 @@ struct CustomTextField: View {
                             print("New text: \(newText)")
                         }
             }
-                    .padding([.top], 10)
+                    .padding([.top], 5)
         } else {
 
             // Password textfield
             VStack(alignment: .leading) {
-                Text(label)
-                        .font(.system(size: 14, weight: .medium, design: .default))
                 SecureField("\(placeholder)", text: $input)
-                        .padding(16)
+                        .padding(12)
                         .background(Color.white)
-                        .cornerRadius(30)
                         .textInputAutocapitalization(.never)
                         .autocorrectionDisabled(true)
-                        .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color.gray.opacity(0.25), lineWidth: 1)
-                        )
+                        .border(focus ? .blue : .gray.opacity(0.5))
                         .textContentType(.password)
                         .focused($focus)
+                        .onTapGesture {
+                            print("Focus tapped on !")
+                            // Update focus
+                            focus = true
+                        }
                         .onChange(of: input) { newText in
                             print("Hello")
                             // Perform action or update state based on the new text
                             print("New text: \(newText)")
                         }
             }
-                    .padding([.top], 15)
+                    .padding([.top], 5)
         }
     }
 }
@@ -80,7 +70,6 @@ struct CustomTextField_Previews: PreviewProvider {
     static var previews: some View {
         CustomTextField(
                 input: .constant("This is me"),
-                label: "Your email address",
                 placeholder: "Placeholder",
                 isSecured: false
         )
