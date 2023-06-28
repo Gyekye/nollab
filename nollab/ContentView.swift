@@ -10,7 +10,7 @@ struct ContentView: View {
     // UI
     var body: some View {
         NavigationStack {
-            VStack(alignment: .center) {
+            VStack(alignment: .center, spacing: 16) {
                 HStack(alignment: .top) {
                     Image("Hero")
                         .resizable()
@@ -18,13 +18,14 @@ struct ContentView: View {
                         .padding([.bottom], 50)
                 }
                 Text("Nollaboration🎉")
-                    .font(.system(size:35, weight: .black ))
+                    .font(.largeTitle)
+                    .bold()
                     .padding([.top], 2)
                     .padding(.bottom, 0.4)
                 
                 Text("Share your favorite notes !")
                     .padding(.bottom, 20)
-                    .font(.system(size: 18, weight: .medium))
+                    .font(.body)
             
                 
                 Button(action: {
@@ -48,13 +49,13 @@ struct ContentView: View {
                 .padding(.top, 5)
                     
             }
-            .padding(10)
+            .padding(20)
         }
         .navigationBarBackButtonHidden(true)
-        .sheet(isPresented: $showSheet){
-            LoginPage(showSheet: $showSheet)
+        .fullScreenCover(isPresented: $showSheet){
+            LoginPage(showSheet: self.$showSheet)
         }
-        .popover(isPresented: $showPopOver){
+        .fullScreenCover(isPresented: self.$showPopOver){
             
         }
     }

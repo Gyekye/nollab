@@ -11,14 +11,18 @@ struct LoginPage: View {
     // show sign up sheet
     @State private var showSignUpSheet = false
     
+    // Home page navigation handler
+    @State private var homePageActive = false
+    
     // Binding for sheet
     @Binding var showSheet: Bool
+
     
     
     // UI
     var body: some View {
         NavigationStack {
-            VStack(alignment: .center, spacing: 15) {
+            VStack(alignment: .center) {
                 Image("Login")
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -37,7 +41,7 @@ struct LoginPage: View {
                 )
                 
                 Button(action: {
-                    
+                    self.homePageActive = true
                 }){
                     Label("Continue", systemImage: "touchid")
                         .frame(maxWidth: .infinity)
@@ -45,7 +49,7 @@ struct LoginPage: View {
                 }
                 .buttonStyle(.borderedProminent)
                 .padding(.top, 5)
-                
+        
                 Spacer()
             }
             .padding([.horizontal], 10)
@@ -54,17 +58,20 @@ struct LoginPage: View {
             .toolbar{
                 ToolbarItem(placement:.confirmationAction){
                     Button("Dismiss") {
-                        showSheet = false
+                        self.showSheet = false
                     }
                 }
             }
-        }
-        .sheet(isPresented: $showSignUpSheet){
-            SignUpPage(dismissSheet: $showSignUpSheet)
-        }
-        .safeAreaInset(edge: /*@START_MENU_TOKEN@*/.bottom/*@END_MENU_TOKEN@*/) {
-            Button("Create an account ?") {
-                showSignUpSheet = true
+            .navigationDestination(isPresented: self.$homePageActive){
+                HomePage()
+            }
+            .fullScreenCover(isPresented: $showSignUpSheet){
+                SignUpPage(dismissSheet: $showSignUpSheet)
+            }
+            .safeAreaInset(edge: /*@START_MENU_TOKEN@*/.bottom/*@END_MENU_TOKEN@*/) {
+                Button("Create an account ?") {
+                    self.showSignUpSheet = true
+                }
             }
         }
     }
